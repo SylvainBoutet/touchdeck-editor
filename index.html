@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TouchDeck</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='6' width='28' height='20' rx='4' fill='%233A7BD5'/%3E%3Crect x='6' y='10' width='8' height='5' rx='1.5' fill='white'/%3E%3Crect x='18' y='10' width='8' height='5' rx='1.5' fill='white'/%3E%3Crect x='6' y='17' width='8' height='5' rx='1.5' fill='white'/%3E%3Crect x='18' y='17' width='8' height='5' rx='1.5' fill='white'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="css/editor.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="logo"></span>TouchDeck</div>
+      <div id="status" class="status off">Carte non connectée</div>
+      <div class="actions">
+        <button id="btnConnect" class="primary">Connecter la carte</button>
+        <button id="btnSave" class="accent" disabled>Enregistrer sur la carte</button>
+        <button id="btnShot" disabled title="Voir l'écran réel de la carte">Écran réel</button>
+        <span class="sep"></span>
+        <button id="btnImport" title="Charger une sauvegarde">Importer</button>
+        <button id="btnExport" title="Télécharger une sauvegarde complète (réglages et images)">Exporter</button>
+        <input id="fileImport" type="file" accept=".json,application/json" hidden />
+      </div>
+    </header>
+
+    <div id="unsupported" class="banner" hidden>
+      Ce navigateur ne sait pas parler à la carte par USB. Ouvre cette page dans <b>Microsoft Edge</b> ou <b>Google Chrome</b> sur l'ordinateur.
+    </div>
+
+    <main class="layout">
+      <aside class="pages">
+        <div class="panel-title">Pages <button id="btnAddPage" class="small" title="Ajouter une page">+ Page</button></div>
+        <ol id="pageList"></ol>
+      </aside>
+
+      <section class="center">
+        <div class="stage-wrap"><div id="stage" class="stage"></div></div>
+        <p class="hint">Glisse un widget de la palette sur une case, ou clique sur une case vide. Fais glisser un élément pour le déplacer, et son coin bas-droit pour l'agrandir.</p>
+        <section class="palette-box">
+          <div class="panel-title">Widgets</div>
+          <div id="palette" class="palette"></div>
+        </section>
+        <div id="problems"></div>
+      </section>
+
+      <aside class="inspector">
+        <nav class="tabs" id="tabs">
+          <button data-tab="item">Élément</button>
+          <button data-tab="page">Page</button>
+          <button data-tab="theme">Thème</button>
+          <button data-tab="data">Données</button>
+          <button data-tab="device">Carte</button>
+        </nav>
+        <div id="inspector" class="inspector-body"></div>
+      </aside>
+    </main>
+
+    <dialog id="dlgIcon" class="dialog wide">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h3>Choisir une icône</h3>
+          <input id="iconSearch" type="search" placeholder="Rechercher (micro, volume, windows...)" />
+          <label class="button small">Image du PC<input id="iconUpload" type="file" accept="image/*" hidden /></label>
+          <button value="none" class="small">Aucune</button>
+          <button value="cancel" class="small">Fermer</button>
+        </div>
+        <div id="iconGrid" class="icon-grid"></div>
+      </form>
+    </dialog>
+
+    <dialog id="dlgAdd" class="dialog">
+      <form method="dialog">
+        <h3>Ajouter dans cette case</h3>
+        <div class="choice">
+          <button value="button" class="big"><span class="td-icon">&#xf0a6;</span>Bouton<small>une action au toucher</small></button>
+          <button value="widget" class="big"><span class="td-icon">&#xf201;</span>Zone d'info<small>heure, stats, texte...</small></button>
+        </div>
+        <button value="cancel" class="small">Annuler</button>
+      </form>
+    </dialog>
+
+    <dialog id="dlgPin" class="dialog">
+      <form method="dialog" id="pinForm">
+        <h3>Code de la carte</h3>
+        <p>Cette carte est protégée. Tape son code pour pouvoir la modifier.</p>
+        <input id="pinInput" type="password" inputmode="numeric" autocomplete="off" />
+        <p id="pinError" class="error" hidden>Code incorrect.</p>
+        <div class="row-buttons">
+          <button value="cancel" class="small">Annuler</button>
+          <button value="ok" class="primary">Valider</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="dlgShot" class="dialog wide">
+      <form method="dialog">
+        <div class="dialog-head"><h3>Écran réel de la carte</h3><button value="cancel" class="small">Fermer</button></div>
+        <canvas id="shotCanvas" width="480" height="320"></canvas>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

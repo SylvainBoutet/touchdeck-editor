@@ -1,0 +1,327 @@
+{
+  "version": 1,
+  "device": {
+    "name": "TouchDeck",
+    "brightness": 80,
+    "keyboard_layout": "fr",
+    "start_page": "home",
+    "timezone": "Europe/Paris"
+  },
+  "theme": {
+    "preset": "sombre",
+    "background": "#000000",
+    "swipe": true,
+    "numbers": "condensed",
+    "clock_color": "#F0E020",
+    "track_color": "#3A3A3A",
+    "accents": [
+      "#C0E800",
+      "#3040F0",
+      "#E000C0",
+      "#00F0F0",
+      "#F0E020",
+      "#E02020"
+    ],
+    "grid": {
+      "cols": 4,
+      "rows": 2,
+      "gap": 8,
+      "margin": 8
+    },
+    "button": {
+      "color": "#161616",
+      "opacity": 100,
+      "radius": 12,
+      "text_color": "#FFFFFF",
+      "pressed_color": "#3A3A3A",
+      "icon_size": 40,
+      "border": {
+        "width": 0,
+        "color": "#FFFFFF"
+      }
+    },
+    "widget": {
+      "color": "#000000",
+      "opacity": 100,
+      "radius": 12
+    }
+  },
+  "sources": {
+    "cpu": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    },
+    "ram": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    },
+    "disk": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    },
+    "net_down": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    },
+    "net_up": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    },
+    "volume": {
+      "type": "push",
+      "default": "--",
+      "stale_s": 10
+    }
+  },
+  "pages": [
+    {
+      "id": "home",
+      "name": "Accueil",
+      "items": [
+        {
+          "type": "widget",
+          "widget": "clock",
+          "style": "seconds",
+          "col": 0,
+          "row": 0,
+          "colspan": 2
+        },
+        {
+          "type": "widget",
+          "widget": "dual",
+          "col": 2,
+          "row": 0,
+          "colspan": 2,
+          "title": "CPU",
+          "source": "cpu",
+          "unit": "%",
+          "title2": "RAM",
+          "source2": "ram",
+          "unit2": "%"
+        },
+        {
+          "type": "widget",
+          "widget": "chart",
+          "col": 0,
+          "row": 1,
+          "colspan": 2,
+          "title": "CPU",
+          "source": "cpu",
+          "unit": "%",
+          "points": 40,
+          "every_s": 2,
+          "bar_color": "#E02020"
+        },
+        {
+          "type": "widget",
+          "widget": "media",
+          "col": 2,
+          "row": 1,
+          "colspan": 2
+        }
+      ]
+    },
+    {
+      "id": "shortcuts",
+      "name": "Raccourcis",
+      "grid": {
+        "cols": 4,
+        "rows": 3
+      },
+      "items": [
+        {
+          "type": "button",
+          "col": 0,
+          "row": 0,
+          "label": "Micro",
+          "icon": "sym:microphone",
+          "toggle": true,
+          "on": {
+            "label": "Coupé",
+            "icon": "sym:microphone_slash",
+            "color": "#E02020"
+          },
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "mic_mute"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 1,
+          "row": 0,
+          "label": "Copier",
+          "icon": "sym:copy",
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "copy"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 2,
+          "row": 0,
+          "label": "Coller",
+          "icon": "sym:paste",
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "paste"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 3,
+          "row": 0,
+          "label": "Capture",
+          "icon": "sym:camera",
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "screenshot"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 0,
+          "row": 1,
+          "label": "Bureau",
+          "icon": "sym:desktop",
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "desktop"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 1,
+          "row": 1,
+          "label": "Verrouiller",
+          "icon": "sym:lock",
+          "actions": [
+            {
+              "type": "shortcut",
+              "name": "lock"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 2,
+          "row": 1,
+          "label": "Spotify",
+          "icon": "sym:spotify",
+          "actions": [
+            {
+              "type": "launch",
+              "app": "spotify"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "col": 3,
+          "row": 1,
+          "label": "Discord",
+          "icon": "sym:discord",
+          "actions": [
+            {
+              "type": "launch",
+              "app": "discord"
+            }
+          ]
+        },
+        {
+          "type": "widget",
+          "widget": "volume",
+          "col": 0,
+          "row": 2,
+          "colspan": 4,
+          "source": "volume"
+        }
+      ]
+    },
+    {
+      "id": "stats",
+      "name": "Stats",
+      "items": [
+        {
+          "type": "widget",
+          "widget": "gauge",
+          "col": 0,
+          "row": 0,
+          "title": "Disque",
+          "source": "disk",
+          "unit": "%"
+        },
+        {
+          "type": "widget",
+          "widget": "value",
+          "col": 1,
+          "row": 0,
+          "colspan": 2,
+          "title": "Réception",
+          "source": "net_down",
+          "unit": "Ko/s"
+        },
+        {
+          "type": "widget",
+          "widget": "clock",
+          "style": "analog",
+          "col": 3,
+          "row": 0
+        },
+        {
+          "type": "widget",
+          "widget": "bar",
+          "col": 0,
+          "row": 1,
+          "colspan": 2,
+          "title": "RAM",
+          "source": "ram",
+          "unit": "%",
+          "thresholds": [
+            {
+              "from": 85,
+              "color": "#E02020"
+            }
+          ]
+        },
+        {
+          "type": "widget",
+          "widget": "text",
+          "col": 2,
+          "row": 1,
+          "text": "IP\n{ip}",
+          "size": 14
+        },
+        {
+          "type": "button",
+          "col": 3,
+          "row": 1,
+          "label": "Accueil",
+          "icon": "sym:home",
+          "actions": [
+            {
+              "type": "page",
+              "page": "home"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
